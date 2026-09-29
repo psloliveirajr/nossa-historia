@@ -436,7 +436,7 @@ back_html_snippet = f"""
       <div class="col-letter">
         <div class="header-box">
           <div class="eyebrow">Nossa História de Amor</div>
-          <div class="main-title">Paulo & Maria Clara</div>
+          <div class="main-title">Paulinho & Clara</div>
           <div class="date-badge">13 DE JULHO DE 2026 • PARA SEMPRE</div>
         </div>
 
@@ -446,7 +446,7 @@ back_html_snippet = f"""
         </div>
 
         <div class="letter-snip">
-          Minha querida Maria Clara, desde aquela primeira mensagem meu mundo ficou infinitamente mais leve e feliz. Cada dia ao seu lado é uma página inesquecível da nossa vida. Este cartão guarda o início de todos os nossos capítulos.
+          Minha primcesa, desde aquela primeira mensagem meu mundo ficou infinitamente mais leve e feliz. Cada dia ao seu lado é uma página inesquecível da nossa vida. Este cartão guarda o início de todos os nossos capítulos.
         </div>
 
         <div class="footer-row">
@@ -649,7 +649,7 @@ html_a4 = f"""<!DOCTYPE html>
   <!-- FOLHA A4 - PÁGINA 1: FRENTE -->
   <div class="a4-sheet">
     <div class="print-instructions-top">
-      <div class="inst-title">💖 Cartão de Amor • Paulo Sérgio & Maria Clara</div>
+      <div class="inst-title">💖 Cartão de Amor • Paulinho & Clara</div>
       <div class="inst-sub">Página 1: Frente (Arte Floral & Retrato) • Formato A6 (148 x 105 mm)</div>
     </div>
 
@@ -674,7 +674,7 @@ html_a4 = f"""<!DOCTYPE html>
   <!-- FOLHA A4 - PÁGINA 2: VERSO -->
   <div class="a4-sheet">
     <div class="print-instructions-top">
-      <div class="inst-title">💖 Cartão de Amor • Paulo Sérgio & Maria Clara</div>
+      <div class="inst-title">💖 Cartão de Amor • Paulinho & Clara</div>
       <div class="inst-sub">Página 2: Verso (Design Postal com QR Code para o Site) • Formato A6 (148 x 105 mm)</div>
     </div>
 

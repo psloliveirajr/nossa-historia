@@ -422,11 +422,11 @@ class ScrollytellingApp {
 
     card.classList.add('is-open');
 
-    // Em telas menores, ajusta a visibilidade
+    // Em telas menores, ajusta a visibilidade centralizando o cartão
     if (window.innerWidth < 860) {
       setTimeout(() => {
-        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 350);
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
     }
   }
 
@@ -435,6 +435,11 @@ class ScrollytellingApp {
     const card = document.getElementById('greeting-card-3d');
     if (card) {
       card.classList.remove('is-open');
+      if (window.innerWidth < 860) {
+        setTimeout(() => {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 200);
+      }
     }
   }
 

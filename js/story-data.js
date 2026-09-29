@@ -220,7 +220,7 @@ const STORY_DATA = {
   // --- O GRAN FINALE: CARTÃO DE AMOR INTERATIVO ---
   finale: {
     chapterNumber: "Epílogo",
-    title: "Para Você, Maria Clara",
+    title: "Para Você, meu Amor",
     subtitle: "Um cartão especial para o amor da minha vida",
     // Capa do Cartão com a Arte Personalizada da Foto 11 no tamanho A6
     cardCoverImage: "assets/images/card_cover_a6.jpg",
@@ -228,8 +228,8 @@ const STORY_DATA = {
     cardCoverTitle: "Maria Clara",
     cardCoverPhrase: "Você é o melhor que me aconteceu",
     cardCoverCaption: "Nós dois, para sempre ❤️",
-    // Mensagem interna da Carta (Revisada com carinho e pontuação impecável)
-    salutation: "Minha querida Maria Clara,",
+    // Mensagem interna da Carta
+    salutation: "Minha primcesa,",
     letterText: [
       "Desde aquela primeira mensagem no Instagram, meu mundo ficou infinitamente mais leve e feliz. A nossa história começou bem antes do dia 13 de julho, naquele instante em que nossos caminhos se cruzaram.",
       "Amo o seu abraço, seus beijos, suas chatices, suas crises de riso e toda a cumplicidade que a gente construiu em tão pouco tempo. Obrigado por ser essa pessoa incrível, doce e tão especial para mim.",
