@@ -1,0 +1,623 @@
+/* ====================================================================
+   ESTILOS GERAIS & SISTEMA DE DESIGN ROMÂNTICO (MAIN.CSS)
+   ==================================================================== */
+
+:root {
+  --color-bg: #fbf7f4;
+  --color-paper: #fffdf9;
+  --color-paper-alt: #f7f1e9;
+  --color-rose-light: #ffe4e6;
+  --color-rose: #f43f5e;
+  --color-rose-dark: #be123c;
+  --color-burgundy: #881337;
+  --color-gold: #c59b27;
+  --color-gold-light: #fef3c7;
+  --color-text-main: #292524;
+  --color-text-muted: #78716c;
+  --color-text-light: #a8a29e;
+  --shadow-subtle: 0 4px 20px -2px rgba(136, 19, 55, 0.06);
+  --shadow-card: 0 10px 25px -5px rgba(136, 19, 55, 0.1), 0 8px 10px -6px rgba(136, 19, 55, 0.05);
+  --shadow-book: 0 20px 45px -10px rgba(78, 12, 34, 0.35), 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-handwriting: 'Dancing Script', cursive;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(#fecdd3 0.75px, transparent 0.75px), 
+    radial-gradient(#fecdd3 0.75px, var(--color-bg) 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+/* ====================================================================
+   REPRODUTOR DE MÚSICA FLUTUANTE COM BOTÃO DE PLAY MODERNO & VOLUME
+   ==================================================================== */
+.music-player-widget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9990;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 6px 6px 6px 14px;
+  border-radius: 9999px;
+  box-shadow: 0 10px 30px rgba(136, 19, 55, 0.14), 0 2px 6px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(244, 63, 94, 0.25);
+  transition: padding 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s ease,
+              transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+}
+
+.music-player-widget:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 35px rgba(244, 63, 94, 0.24), 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* Estado Recolhido: apenas o botão de Play/Pause fica visível */
+.music-player-widget.collapsed {
+  padding: 4px;
+  box-shadow: 0 8px 24px rgba(136, 19, 55, 0.18), 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Área de Detalhes Retrátil (Vinil, Título, Ondas, Volume) */
+.music-player-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 480px;
+  opacity: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-right: 8px;
+  transition: max-width 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.25s ease,
+              margin 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.music-player-widget.collapsed .music-player-details {
+  max-width: 0;
+  opacity: 0;
+  margin-right: 0;
+  pointer-events: none;
+}
+
+/* --- BOTÃO DE PLAY / PAUSE DEDICADO --- */
+.music-play-btn {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fb7185 0%, #e11d48 55%, #be123c 100%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(225, 29, 72, 0.42), inset 0 1.5px 2px rgba(255, 255, 255, 0.5);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  outline: none;
+}
+
+.music-play-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 22px rgba(225, 29, 72, 0.58), inset 0 1.5px 3px rgba(255, 255, 255, 0.6);
+}
+
+.music-play-btn:active {
+  transform: scale(0.93);
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.4);
+}
+
+/* Aura pulsante ao redor do play quando está tocando */
+.play-btn-glow {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.6) 0%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.music-player-widget.playing .play-btn-glow {
+  animation: playAuraPulse 2.2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+@keyframes playAuraPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.85;
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7);
+  }
+  60% {
+    transform: scale(1.35);
+    opacity: 0;
+    box-shadow: 0 0 0 12px rgba(244, 63, 94, 0);
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.play-btn-icon-wrapper {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-icon-svg {
+  width: 100%;
+  height: 100%;
+  fill: #ffffff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+.play-icon-svg .icon-play {
+  transform-origin: center;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+}
+
+.play-icon-svg .icon-pause {
+  transform-origin: center;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+/* Alternância suave entre ícone Play e Pause */
+.music-player-widget.playing .play-icon-svg .icon-play {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.music-player-widget.playing .play-icon-svg .icon-pause {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* --- MINI VINIL GIRATÓRIO --- */
+.vinyl-disc-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.vinyl-disc {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #262626 22%, #171717 65%, #0a0a0a 100%);
+  border: 1.5px solid #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+  animation: spinVinyl 3.5s linear infinite;
+  animation-play-state: paused;
+  transition: transform 0.3s ease;
+}
+
+.vinyl-disc-container:hover .vinyl-disc {
+  transform: scale(1.06);
+}
+
+.music-player-widget.playing .vinyl-disc {
+  animation-play-state: running;
+}
+
+@keyframes spinVinyl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.vinyl-groove {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.groove-1 { inset: 5px; }
+.groove-2 { inset: 9px; }
+
+.vinyl-center {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f43f5e, #be123c);
+  border: 1.5px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.vinyl-heart {
+  font-size: 7px;
+  line-height: 1;
+  display: block;
+}
+
+/* --- INFORMAÇÕES DA MÚSICA & ONDAS --- */
+.music-info {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.music-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-burgundy);
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.music-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.music-subtitle {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.music-player-widget.playing .music-subtitle {
+  color: var(--color-rose-dark);
+  font-weight: 600;
+}
+
+.music-waves {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.music-waves span {
+  width: 2.5px;
+  height: 3px;
+  background: var(--color-rose);
+  border-radius: 2px;
+  transition: height 0.2s ease, opacity 0.2s ease;
+  opacity: 0.45;
+}
+
+.music-player-widget.playing .music-waves span {
+  opacity: 1;
+}
+
+.music-player-widget.playing .music-waves span:nth-child(1) {
+  animation: wave 0.8s infinite ease-in-out alternate;
+}
+.music-player-widget.playing .music-waves span:nth-child(2) {
+  animation: wave 0.6s infinite ease-in-out alternate 0.15s;
+}
+.music-player-widget.playing .music-waves span:nth-child(3) {
+  animation: wave 0.9s infinite ease-in-out alternate 0.3s;
+}
+.music-player-widget.playing .music-waves span:nth-child(4) {
+  animation: wave 0.7s infinite ease-in-out alternate 0.45s;
+}
+
+@keyframes wave {
+  0% { height: 3px; }
+  100% { height: 14px; }
+}
+
+/* Divisória sutil entre player e volume */
+.music-divider {
+  width: 1px;
+  height: 22px;
+  background: rgba(244, 63, 94, 0.2);
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+/* Seção de Volume */
+.music-volume-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.volume-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-burgundy);
+  border-radius: 50%;
+  transition: transform 0.2s ease, color 0.2s ease;
+  outline: none;
+}
+
+.volume-btn:hover {
+  transform: scale(1.15);
+  color: var(--color-rose);
+}
+
+.volume-icon {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  display: block;
+}
+
+.volume-slider-wrapper {
+  display: flex;
+  align-items: center;
+  width: 68px;
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, #f43f5e 0%, #f43f5e 50%, #e2e8f0 50%, #e2e8f0 100%);
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--color-rose);
+  box-shadow: 0 1px 4px rgba(244, 63, 94, 0.4);
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+  background: var(--color-rose-light);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--color-rose);
+  box-shadow: 0 1px 4px rgba(244, 63, 94, 0.4);
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.volume-slider::-moz-range-thumb:hover {
+  transform: scale(1.25);
+  background: var(--color-rose-light);
+}
+
+/* Responsividade Mobile para o Widget */
+@media (max-width: 640px) {
+  .music-player-widget {
+    bottom: 16px;
+    right: 16px;
+    padding: 5px 5px 5px 12px;
+  }
+  .music-player-widget.collapsed {
+    padding: 4px;
+  }
+  .music-player-details {
+    gap: 8px;
+    margin-right: 6px;
+  }
+  .music-play-btn {
+    width: 38px;
+    height: 38px;
+  }
+  .play-btn-icon-wrapper {
+    width: 18px;
+    height: 18px;
+  }
+  .vinyl-disc-container {
+    display: none;
+  }
+  .music-title {
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .volume-slider-wrapper {
+    width: 44px;
+  }
+}
+
+/* ====================================================================
+   ESTILOS COMPARTILHADOS: CONTADOR EM TEMPO REAL
+   ==================================================================== */
+.time-counter-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.counter-box {
+  background: linear-gradient(145deg, #ffffff, #fff5f5);
+  border: 1px solid rgba(244, 63, 94, 0.15);
+  border-radius: 16px;
+  padding: 14px 8px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(244, 63, 94, 0.06);
+  transition: transform 0.2s ease;
+}
+
+.counter-box:hover {
+  transform: translateY(-2px);
+}
+
+.counter-num {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-burgundy);
+  line-height: 1;
+}
+
+.counter-unit {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* ====================================================================
+   ESTILOS COMPARTILHADOS: POLAROIDS COM WASHI TAPE
+   ==================================================================== */
+.polaroid-frame {
+  background: #ffffff;
+  padding: 12px 12px 24px 12px;
+  border-radius: 2px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.polaroid-frame:hover {
+  transform: scale(1.04) rotate(0deg) !important;
+  box-shadow: 0 20px 40px rgba(136, 19, 55, 0.18);
+  z-index: 10;
+}
+
+.washi-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 22px;
+  background: rgba(254, 205, 211, 0.75);
+  backdrop-filter: blur(2px);
+  border-left: 2px dashed rgba(244, 63, 94, 0.3);
+  border-right: 2px dashed rgba(244, 63, 94, 0.3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.polaroid-img-wrapper {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 1px;
+  background: #f5ebe6;
+}
+
+.polaroid-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.polaroid-frame:hover .polaroid-img-wrapper img {
+  transform: scale(1.05);
+}
+
+.polaroid-caption {
+  font-family: var(--font-handwriting);
+  font-size: 1.25rem;
+  color: #374151;
+  text-align: center;
+  margin-top: 14px;
+}
+
+
+/* ====================================================================
+   CLASSES AUXILIARES & ANIMAÇÕES
+   ==================================================================== */
+.hidden { display: none !important; }
+.text-center { text-align: center; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s ease forwards;
+}
+
+/* Botão de Celebração Principal */
+.btn-celebrate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 9999px;
+  box-shadow: 0 10px 25px rgba(244, 63, 94, 0.4);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-celebrate:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(244, 63, 94, 0.5);
+}
+
+.btn-celebrate:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Canvas de efeitos de partículas (corações flutuantes e confetes) */
+#effects-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 99999;
+}

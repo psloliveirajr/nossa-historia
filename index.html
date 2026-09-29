@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Nossa História de Amor • Paulo & Maria Clara</title>
+  
+  <!-- Fontes Românticas de Alta Qualidade -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS via CDN para utilitários de alta fidelidade -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Estilos Personalizados -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/scrollytelling.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
+</head>
+<body>
+
+  <!-- Barra de Progresso de Leitura no Topo -->
+  <div class="reading-progress-track">
+    <div class="reading-progress-bar" id="reading-progress"></div>
+  </div>
+
+  <!-- ====================================================================
+       REPRODUTOR DE MÚSICA AMBIENTE
+       ==================================================================== -->
+  <div class="music-player-widget" id="music-player-widget" role="region" aria-label="Reprodutor de música">
+    <!-- Conteúdo retrátil que recolhe após 3 segundos de inatividade -->
+    <div class="music-player-details" id="music-player-details">
+      <!-- Mini Vinil Giratório -->
+      <div class="vinyl-disc-container" id="music-vinyl-btn" title="Bloco dos Apaixonados • Sotam">
+        <div class="vinyl-disc" id="music-vinyl-disc">
+          <div class="vinyl-groove groove-1"></div>
+          <div class="vinyl-groove groove-2"></div>
+          <div class="vinyl-center">
+            <span class="vinyl-heart">❤️</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Informações da Música -->
+      <div class="music-info" id="music-info-btn">
+        <span class="music-title">Bloco dos Apaixonados</span>
+        <div class="music-meta">
+          <span class="music-subtitle" id="music-status-text">Clique para ouvir</span>
+          <div class="music-waves" id="music-waves">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="music-divider"></div>
+
+      <!-- Controle de Volume -->
+      <div class="music-volume-control" title="Volume da música">
+        <button class="volume-btn" id="music-volume-btn" type="button" aria-label="Mudar volume/mudo">
+          <svg id="volume-icon" class="volume-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+        </button>
+        <div class="volume-slider-wrapper">
+          <input type="range" id="music-volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="0.5" aria-label="Ajustar Volume">
+        </div>
+      </div>
+    </div>
+
+    <!-- Botão de Ação Play / Pause Principal (Permanece sempre visível) -->
+    <button class="music-play-btn" id="music-toggle-btn" type="button" aria-label="Tocar música" title="Tocar música">
+      <span class="play-btn-glow"></span>
+      <div class="play-btn-icon-wrapper">
+        <svg class="play-icon-svg" viewBox="0 0 24 24">
+          <polygon class="icon-play" points="8,5 19,12 8,19"></polygon>
+          <g class="icon-pause">
+            <rect x="6" y="5" width="3.5" height="14" rx="1.5"></rect>
+            <rect x="14.5" y="5" width="3.5" height="14" rx="1.5"></rect>
+          </g>
+        </svg>
+      </div>
+    </button>
+  </div>
+
+  <!-- ====================================================================
+       EXPERIÊNCIA PRINCIPAL: DIÁRIO DE MEMÓRIAS (SCROLLYTELLING)
+       ==================================================================== -->
+  <main id="scrolly-app"></main>
+
+  <!-- Modal de Zoom de Fotos (Lightbox) -->
+  <div id="photo-modal" class="photo-lightbox hidden" onclick="window.scrollytelling.closeModal()">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <button class="lightbox-close" onclick="window.scrollytelling.closeModal()">✕</button>
+      <img id="lightbox-img" src="" alt="Foto ampliada">
+      <p id="lightbox-caption" class="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <!-- Canvas para partículas de corações e confetes -->
+  <canvas id="effects-canvas"></canvas>
+
+  <!-- ====================================================================
+       SCRIPTS JAVASCRIPT ORGANIZADOS
+       ==================================================================== -->
+  <!-- Biblioteca de Ícones Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="js/story-data.js"></script>
+  <script src="js/hearts.js"></script>
+  <script src="js/audio-player.js"></script>
+  <script src="js/scrollytelling.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
