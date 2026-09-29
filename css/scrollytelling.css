@@ -961,47 +961,146 @@
   background: rgba(244, 63, 94, 0.08);
 }
 
+/* Destaque romântico mobile (oculto no desktop) */
+.mobile-inside-decor {
+  display: none;
+}
+
 /* ====================================================================
    RESPONSIVIDADE MOBILE DO CARTÃO A6
    ==================================================================== */
 @media (max-width: 859px) {
   .card-scene-wrapper {
-    overflow-x: hidden;
-    padding: 10px 10px 5px 10px;
+    overflow-x: clip;
+    padding: 10px 8px 5px 8px;
     min-height: auto;
   }
 
   .greeting-card-3d {
     width: min(94vw, 420px);
     height: calc(min(94vw, 420px) * 105 / 148);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), height 0.5s ease;
   }
 
   .greeting-card-3d.is-open {
     transform: none;
     height: auto;
-    min-height: 480px;
+    min-height: 520px;
   }
 
+  /* Na abertura mobile, a capa gira suavemente e desvanece para não sobrar fora da tela */
   .greeting-card-3d.is-open .card-cover-flap {
     transform: rotateY(-180deg);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.75s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease 0.5s;
+  }
+
+  .greeting-card-3d:not(.is-open) .card-cover-flap {
+    transform: rotateY(0deg);
+    opacity: 1;
+    pointer-events: auto;
+    transition: transform 0.75s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease;
   }
 
   .card-base-inside {
-    padding: 22px 18px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 24px 20px;
+    border-radius: 18px;
+    box-shadow: 0 14px 40px rgba(136, 19, 55, 0.12), 0 4px 12px rgba(0, 0, 0, 0.05);
+    height: auto;
+    min-height: 520px;
+    overflow-y: visible;
+  }
+
+  .mobile-inside-decor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(254, 226, 226, 0.5), rgba(255, 241, 242, 0.7));
+    border: 1px dashed rgba(244, 63, 94, 0.3);
+    border-radius: 14px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(244, 63, 94, 0.05);
+  }
+
+  .mobile-stamp-pill {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #9f1239;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .mobile-quote-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.98rem;
+    color: #881337;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .mobile-quote-sign {
+    font-family: var(--font-handwriting);
+    font-size: 1.25rem;
+    color: #be123c;
+    display: inline-block;
+    margin-left: 6px;
+    font-style: normal;
+  }
+
+  .stationery-stamp-header {
+    display: none; /* No mobile, o topo já é preenchido pelo mobile-inside-decor */
   }
 
   .card-letter-content .letter-salutation {
-    font-size: 1.65rem;
+    font-size: 1.7rem;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .card-letter-content .letter-paragraphs {
+    gap: 10px;
+    margin-bottom: 16px;
   }
 
   .card-letter-content .letter-paragraphs p {
-    font-size: 0.88rem;
-    line-height: 1.5;
+    font-size: 0.95rem;
+    line-height: 1.62;
+    color: #292524;
+  }
+
+  .card-letter-content .letter-signature-box {
+    margin-top: 8px;
+    margin-bottom: 16px;
   }
 
   .card-letter-content .letter-sign {
-    font-size: 1.8rem;
+    font-size: 2.1rem;
+  }
+
+  .card-actions-wrapper {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+    width: 100%;
+    padding-top: 10px;
+  }
+
+  .card-actions-wrapper .btn-celebrate {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+
+  .btn-card-close-subtle {
+    justify-content: center;
+    padding: 8px;
+    font-size: 0.85rem;
   }
 }
 

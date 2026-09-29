@@ -228,12 +228,12 @@ const STORY_DATA = {
     cardCoverTitle: "Maria Clara",
     cardCoverPhrase: "Você é o melhor que me aconteceu",
     cardCoverCaption: "Nós dois, para sempre ❤️",
-    // Mensagem interna da Carta
+    // Mensagem interna da Carta (Revisada com carinho e pontuação impecável)
     salutation: "Minha querida Maria Clara,",
     letterText: [
-      "Desde aquela mensagem no Instagram meu mundo ficou infinitamente mais leve e feliz. A nossa história começou bem antes do dia 13 de julho.",
-      "Amo o seu abraço, seus beijos, suas chatisses, sua crises de risos ea cumplicidade que a gente construiu em tão pouco tempo. Obrigado por ser essa pessoa incrível e tão doce.",
-      "Esse site é só o início do nosso livro. Mal posso esperar para escrever todos os próximos capítulos ao seu lado."
+      "Desde aquela primeira mensagem no Instagram, meu mundo ficou infinitamente mais leve e feliz. A nossa história começou bem antes do dia 13 de julho, naquele instante em que nossos caminhos se cruzaram.",
+      "Amo o seu abraço, seus beijos, suas chatices, suas crises de riso e toda a cumplicidade que a gente construiu em tão pouco tempo. Obrigado por ser essa pessoa incrível, doce e tão especial para mim.",
+      "Esse site é só o início do nosso livro. Mal posso esperar para viver e escrever todos os próximos capítulos ao seu lado."
     ],
     closing: "Com todo o meu amor e carinho,",
     signature: "Paulinho ❤️",

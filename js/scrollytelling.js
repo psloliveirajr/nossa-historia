@@ -324,9 +324,9 @@ class ScrollytellingApp {
                     <div class="inside-romantic-quote">
                       <div class="quote-symbol">“</div>
                       <p class="quote-body">
-                        Você me ama muito ou pouco?.
+                        Você me ama muito ou pouco?
                       </p>
-                      <div class="quote-author-sign">— Paulo Sérgio</div>
+                      <div class="quote-author-sign">— Paulinho ❤️</div>
                     </div>
 
                     <div class="inside-left-bottom">
@@ -343,6 +343,17 @@ class ScrollytellingApp {
               <div class="card-base-inside">
                 <div class="card-letter-content">
                   
+                  <!-- Destaque romântico exibido no celular -->
+                  <div class="mobile-inside-decor">
+                    <div class="mobile-stamp-pill">
+                      <span>💌 13.JUL.2026 • AMOR ETERNO</span>
+                    </div>
+                    <p class="mobile-quote-text">
+                      “Você me ama muito ou pouco?”
+                      <span class="mobile-quote-sign">— Paulinho ❤️</span>
+                    </p>
+                  </div>
+
                   <div class="stationery-stamp-header">
                     <div class="stationery-date-tag">Para Sempre</div>
                     <div class="stationery-stamp-mini">💖</div>
