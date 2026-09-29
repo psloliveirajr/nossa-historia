@@ -229,7 +229,7 @@ const STORY_DATA = {
     cardCoverPhrase: "Você é o melhor que me aconteceu",
     cardCoverCaption: "Nós dois, para sempre ❤️",
     // Mensagem interna da Carta
-    salutation: "Minha primcesa,",
+    salutation: "Minha princesa,",
     letterText: [
       "Desde aquela primeira mensagem no Instagram, meu mundo ficou infinitamente mais leve e feliz. A nossa história começou bem antes do dia 13 de julho, naquele instante em que nossos caminhos se cruzaram.",
       "Amo o seu abraço, seus beijos, suas chatices, suas crises de riso e toda a cumplicidade que a gente construiu em tão pouco tempo. Obrigado por ser essa pessoa incrível, doce e tão especial para mim.",

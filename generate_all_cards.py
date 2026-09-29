@@ -446,7 +446,7 @@ back_html_snippet = f"""
         </div>
 
         <div class="letter-snip">
-          Minha primcesa, desde aquela primeira mensagem meu mundo ficou infinitamente mais leve e feliz. Cada dia ao seu lado é uma página inesquecível da nossa vida. Este cartão guarda o início de todos os nossos capítulos.
+          Minha princesa, desde aquela primeira mensagem meu mundo ficou infinitamente mais leve e feliz. Cada dia ao seu lado é uma página inesquecível da nossa vida. Este cartão guarda o início de todos os nossos capítulos.
         </div>
 
         <div class="footer-row">
